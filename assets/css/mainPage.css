@@ -1,0 +1,241 @@
+/*
+/* Created by Filipe Pina
+ * Specific styles of signin, register, component
+ */
+/*
+ * General styles
+ */
+
+body, html{
+    height: 100%;
+ 	background-repeat: no-repeat;
+ 	background-color: #d3d3d3;
+	 font-family: 'Oxygen', sans-serif;
+	 
+}
+
+.main{
+ 	margin-top: 70px;
+}
+
+h1.title { 
+	font-size: 50px; 
+	font-family: 'Passion One', cursive; 
+	font-weight: 400;  
+	color: white;
+	text-shadow: 3px 5px black;
+}
+h2.title{
+	font-size: 40px;
+    color: black;
+    font-family: 'Passion One', cursive; 
+    /* text-shadow: 3px 3px black; */
+    -webkit-text-stroke: 0.5px white;
+    
+}
+
+hr{
+	width: 10%;
+	color: #fff;
+}
+
+.form-group{
+	margin-bottom: 15px;
+}
+
+label{
+	margin-bottom: 15px;
+}
+
+input,
+input::-webkit-input-placeholder {
+    font-size: 11px;
+    padding-top: 3px;
+}
+
+.main-login{
+ 	/* background-color: #fff; */
+    /* shadows and rounded borders */
+    -moz-border-radius: 15px;
+    -webkit-border-radius: 15px;
+    border-radius: 15px;
+    /* -moz-box-shadow: 0px 15px 15px rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 15px 15px rgba(0, 0, 0, 0.3); */
+
+}
+
+.main-center{
+ 	margin-top: 30px;
+ 	margin: 0 auto;
+ 	max-width: 800px;
+    padding: 40px 40px;
+
+}
+
+.login-button{
+	margin-top: 5px;
+}
+
+.login-register{
+	font-size: 11px;
+	text-align: center;
+}
+
+.bodybg{
+	background-image: url("../images/rulebg.png");
+	background-size: cover;
+}
+
+
+.mainquestion
+{
+     background-color: #fff;
+     
+     
+
+     margin: 10px;
+     padding: 10px;
+     min-height: 50px;
+     
+     
+     -moz-border-radius: 15px;
+    -webkit-border-radius: 15px;
+    border-radius: 15px;
+      -moz-box-shadow: 0px 15px 15px rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+     box-shadow: 0px 15px 15px rgba(0, 0, 0, 0.3); 
+}
+
+
+
+
+.master
+{
+    display: block;
+}
+
+.master .groupAns
+{
+    margin-bottom: 15px;
+    margin: 0 auto;
+    
+}
+
+.master .groupAns .g1
+{
+    margin-bottom: 15px;
+}
+
+.master p
+{
+    display: inline;
+}
+
+
+.roundBorder
+{
+    background-color: #fff;
+    min-width: 200px; 
+    margin: 0 2%; 
+    display: inline-block;
+    -moz-border-radius: 15px;
+    -webkit-border-radius: 15px;
+    border-radius: 15px;
+    -moz-box-shadow: 0px 15px 15px rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 15px 15px rgba(0, 0, 0, 0.3); 
+}
+
+.roundBorder.Answer1
+{
+     /* background-color: #fff; */
+     
+      
+       left: 0;
+
+   
+     /* margin-left: 10px; */
+
+     padding: 10px;
+     min-height: 50px;
+     width: 45%;
+     
+ 
+}
+
+.roundBorder.Answer2
+{
+   float: right;
+    right: 0;
+    /* background-color: #fff; */
+    /* display: inline-block; */
+   
+     
+     /* margin-left: 10px;
+     margin-right: 10px; */
+
+     padding: 10px;
+     min-height: 50px;
+     width: 45%;
+     
+    
+}
+
+
+.roundBorder.Answer3
+{
+   
+    left: 0;
+    
+     /* background-color: #fff; */
+    /* display: inline-block;  */
+     
+   
+     /* margin-left: 10px; */
+
+     padding: 10px;
+     min-height: 50px;
+     width: 45%;
+}
+   
+
+
+.roundBorder.Answer4
+{
+    right: 0;
+     
+    float: right;
+     padding: 10px;
+     min-height: 50px;
+     width: 45%;
+      
+}
+
+
+@media (max-width: 758px)
+{
+    .master .groupAns .g1
+    {
+     
+        margin-bottom: 3%;
+        
+
+    }
+    .roundBorder.Answer1,.roundBorder.Answer3
+    {
+        margin-bottom: 3%;  
+    }
+    .roundBorder.Answer2,.roundBorder.Answer4
+    {
+        
+        float: none;
+    }
+    .roundBorder
+    {
+        min-width: 75%;  
+         display: block;
+         margin: 0 auto;
+    }
+
+}

@@ -27,10 +27,12 @@ h1.title {
 }
 h2.title{
 	font-size: 40px;
-    color: black;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.25);
+    opacity: 70%;
     font-family: 'Passion One', cursive; 
     /* text-shadow: 3px 3px black; */
-    -webkit-text-stroke: 0.5px white;
+    -webkit-text-stroke: 1px black;
     
 }
 
@@ -83,8 +85,12 @@ input::-webkit-input-placeholder {
 }
 
 .bodybg{
-	background-image: url("../images/rulebg.png");
-	background-size: cover;
+	/* background-image: url("../images/rulebg.png"); */
+    background: url("../images/rulebg3.jpg") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }
 
 
@@ -166,37 +172,19 @@ input::-webkit-input-placeholder {
 
 .roundBorder.Answer2
 {
-   float: right;
+    float: right;
     right: 0;
-    /* background-color: #fff; */
-    /* display: inline-block; */
-   
-     
-     /* margin-left: 10px;
-     margin-right: 10px; */
-
-     padding: 10px;
-     min-height: 50px;
-     width: 45%;
-     
-    
+    padding: 10px;
+    min-height: 50px;
+    width: 45%;    
 }
-
-
 .roundBorder.Answer3
 {
    
     left: 0;
-    
-     /* background-color: #fff; */
-    /* display: inline-block;  */
-     
-   
-     /* margin-left: 10px; */
-
-     padding: 10px;
-     min-height: 50px;
-     width: 45%;
+    padding: 10px;
+    min-height: 50px;
+    width: 45%;
 }
    
 
@@ -210,6 +198,16 @@ input::-webkit-input-placeholder {
      min-height: 50px;
      width: 45%;
       
+}
+
+label
+{
+    color: white;
+}
+
+.Answers
+{
+    /* padding: 10px; */
 }
 
 
@@ -237,5 +235,30 @@ input::-webkit-input-placeholder {
          display: block;
          margin: 0 auto;
     }
+    
+    .bodybg
+    {
+        background-attachment: fixed;
+    }
 
+    .Answers
+    {
+        padding: 2.5px;
+        margin: 0 auto;
+    }
+
+    div.input-group
+    {
+        margin-bottom: 10px;
+    }
+
+    div.form-group
+    {
+        margin-top: -10px;
+    }
+    div.btn-group
+    {
+        margin-bottom: 10px;
+    }
+   
 }

@@ -14,10 +14,6 @@ function spanClicked() {
   }
 }
 
-// array.forEach(function(element) {
-
-// }, this);
-
 // $(".ct").click(function() {
 //     debugger
 // var SpanId='';

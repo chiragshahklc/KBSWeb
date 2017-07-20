@@ -10,7 +10,8 @@ function spanClicked() {
     var x = document.getElementById(this.id);
     counter++;
     x.innerHTML = counter;
-    x.style.backgroundColor = "grey";
+    x.style.borderColor = "red";
+    x.style.borderWidth = "2px";
   }
 }
 

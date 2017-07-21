@@ -27,6 +27,6 @@ app.post("/trial", urlEncodedparser, function(req, resp) {
   resp.render("trial", { data: req.body });
 });
 
-app.listen(80, function() {
+app.listen(process.env.PORT || 80, function() {
   console.log("Listening on Port 80.");
 });

@@ -1,0 +1,23 @@
+{
+  "name": "kbsweb",
+  "version": "1.0.0",
+  "description": "Online FFS for KBS",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "express": "^4.15.3",
+    "mysql": "^2.13.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chiragshahklc/KBSWeb.git"
+  },
+  "author": "Fury",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/chiragshahklc/KBSWeb/issues"
+  },
+  "homepage": "https://github.com/chiragshahklc/KBSWeb#readme"
+}

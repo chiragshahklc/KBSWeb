@@ -84,7 +84,7 @@ input,input::-webkit-input-placeholder {
 
 .bodybg {
   /* background-image: url("../images/rulebg.png"); */
-  background: url("../images/rulebg3.jpg") no-repeat center center fixed;
+  background-color: #0F3C4F;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;

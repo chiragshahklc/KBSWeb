@@ -80,6 +80,9 @@ input::-webkit-input-placeholder {
 }
 
 .bodybg{
-	background-image: url("../images/rulebg.png");
-	background-size: cover;
+	background-color: #0F3C4F;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }

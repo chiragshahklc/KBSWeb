@@ -4,6 +4,8 @@ var app = express();
 var bodyParser = require("body-parser");
 var sessions = require("express-session");
 var connection = require("./db");
+var herokucon = require("./db");
+connection = herokucon;
 var io = require("socket.io").listen(3000);
 
 var urlEncodedparser = bodyParser.urlencoded({ extended: false });

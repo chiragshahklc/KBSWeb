@@ -1,14 +1,13 @@
 var express = require("express");
 var path = require("path");
 var app = express();
-var server = require('http').createServer(app);
+var server = require("http").createServer(app);
 var io = require("socket.io").listen(server);
 var bodyParser = require("body-parser");
 var sessions = require("express-session");
 var connection = require("./db");
 var herokucon = require("./db");
 connection = herokucon;
-
 
 var urlEncodedparser = bodyParser.urlencoded({ extended: false });
 
@@ -23,8 +22,12 @@ var socketCount = 0;
 io.sockets.on("connection", function(socket) {
   socketCount++;
   socket.on("loadques", function() {
-    connection.query("select * from fff").on("result", function(data) {
-      socket.emit("quesrecv", data);
+    connection.query("select * from fff", function(err, rows, cols) {
+      if (err) {
+        throw err;
+      } else {
+        socket.emit("quesrecv", rows);
+      }
     });
   });
   //console.log(socketCount);
@@ -59,12 +62,9 @@ app.get(/^(.+)$/, function(req, resp) {
   resp.render(x, { data: req.body });
 });
 
-app.get('/favicon.ico', function(req, res) {
-  console.log("I am here");
-    res.status(204);
-});
 
 app.post("/login", urlEncodedparser, function(req, resp) {
+  console.log(req.body);
   sess = req.session;
   sess.name = req.body.name;
   sess.pass = req.body.password;
@@ -83,6 +83,6 @@ app.post("/login", urlEncodedparser, function(req, resp) {
 //   console.log("Express listening on Port " + listener.address().port);
 // })
 
-var socketListener = server.listen(process.env.PORT || 80, function(){
+var socketListener = server.listen(process.env.PORT || 80, function() {
   console.log("Socket.IO listening on Port " + socketListener.address().port);
-})
+});

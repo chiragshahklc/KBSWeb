@@ -42,6 +42,11 @@
     margin-bottom: 10px;
 }
 
+@font-face {
+    font-family: "gujFont";
+    src: url(../fonts/S1120892_2.TTF) format('truetype');
+}
+
 @media (max-width: 768px) {
   .botpad {
     margin-bottom: 10px;

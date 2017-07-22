@@ -8,6 +8,11 @@
     <!-- <link href="css/style.css" rel="stylesheet"> -->
     <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+
+    <script src="http://localhost:3000/socket.io/socket.io.js"></script>
+    <script>
+        var socket = io.connect('http://192.168.0.101:3000');
+    </script>
 </head>
 
 <body class="bodybg">
@@ -16,7 +21,7 @@
             <h1 class="well well-title">Trial KBS</h1>
         </div>
         <div class="col-sm-4" style="border-right: thick solid #333333;">
-            <div class="well">
+            <div class="well" id="txtQues">
                 Question
             </div>
             <form method="post" action="index2.html">
@@ -25,14 +30,14 @@
                         <div class="col-sm-12">
                             <div class="input-group">
                                 <span class="input-group-addon ct" id="basic-addonA">A</span>
-                                <input type="text" class="form-control" placeholder="Answer A" aria-describedby="basic-addon1">
+                                <input type="text" class="form-control" placeholder="Answer A" aria-describedby="basic-addon1" id="ansA">
                             </div>
                         </div>
                         <div class="col-sm-12">
 
                             <div class="input-group">
                                 <span class="input-group-addon ct" id="basic-addonB">B</span>
-                                <input type="text" class="form-control" placeholder="Answer B" aria-describedby="basic-addon1">
+                                <input type="text" class="form-control" placeholder="Answer B" aria-describedby="basic-addon1" id="ansB">
                             </div>
 
                         </div>
@@ -44,13 +49,13 @@
                             <div class="col-sm-12">
                                 <div class="input-group">
                                     <span class="input-group-addon ct" id="basic-addonC">C</span>
-                                    <input type="text" class="form-control" placeholder="Answer C" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control" placeholder="Answer C" aria-describedby="basic-addon1" id="ansC">
                                 </div>
                             </div>
                             <div class="col-sm-12">
                                 <div class="input-group">
                                     <span class="input-group-addon ct" id="basic-addonD">D</span>
-                                    <input type="text" class="form-control" placeholder="Answer D" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control" placeholder="Answer D" aria-describedby="basic-addon1" id="ansD">
                                 </div>
                             </div>
                         </div>
@@ -60,7 +65,7 @@
                     <div class="row">
                         <div class="col-lg-4 col-lg-offset-4 text-center">
                             <div class="btn-group">
-                                <button type="button" class="btn btn-success">Submit</button>
+                                <button type="button" class="btn btn-success" id="btnLoadQues" >Load Question</button>
                             </div>
                         </div>
                     </div>
@@ -69,7 +74,7 @@
         </div>
         <div class="col-sm-4" style="border-right: thick solid #333333;">
             <div class="form-group">
-               
+
                 <% for(var i=0;i<10;i++){ %>
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-user" aria-hidden="true"></i></span>
@@ -97,6 +102,7 @@
 
     <script src="assets/js/jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="assets/js/bootstrap.js"></script>
+    <script src="assets/js/admin.js"></script>
 </body>
 
 </html>

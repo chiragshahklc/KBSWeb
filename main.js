@@ -6,22 +6,24 @@ var bodyParser = require("body-parser");
 var urlEncodedparser = bodyParser.urlencoded({ extended: false });
 
 app.set("view engine", "ejs");
-
+app.use(urlEncodedparser);
 app.use("/assets", express.static(__dirname + "/assets"));
 
 app.get("/", function(req, resp) {
-//   resp.sendFile("index.html", { root: path.join(__dirname, "/files") });
-    console.log("This is ejs request");
-    resp.render("index");
+  //   resp.sendFile("index.html", { root: path.join(__dirname, "/files") });
+  console.log("This is ejs request");
+  resp.render("index");
 });
 
-app.get("/" + /^(.+)$/, function(req, resp) {
-  console.log(req.params[0]);
- 
+app.get(/^(.+)$/, function(req, resp) {
+  // console.log(req.params[0]);
+  var tmp = req.params[0];
+  var x =tmp.replace("/","");
+  // console.log(x);
   // resp.sendFile(req.params[0] + ".html", {
   //   root: path.join(__dirname + "/files")
   // });
-  resp.render(""+req.param[0]+"");
+  resp.render(x, { data: req.body });
 });
 
 app.post("/trial", urlEncodedparser, function(req, resp) {

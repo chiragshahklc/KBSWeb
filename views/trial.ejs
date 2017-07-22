@@ -7,13 +7,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- <link href="css/style.css" rel="stylesheet"> -->
     <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="assets/css/mainPage.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
 </head>
 
 <body class="bodybg">
     <div class="container">
         <div class="page-header text-center">
-            <h1 class="title">Trial KBS</h1>
+            <h1 class="well well-title">Trial KBS</h1>
         </div>
         <div class="col-sm-4" style="border-right: thick solid #333333;">
             <div class="well">
@@ -29,10 +29,12 @@
                             </div>
                         </div>
                         <div class="col-sm-12">
+
                             <div class="input-group">
                                 <span class="input-group-addon ct" id="basic-addonB">B</span>
                                 <input type="text" class="form-control" placeholder="Answer B" aria-describedby="basic-addon1">
                             </div>
+
                         </div>
                     </div>
                 </div>
@@ -67,18 +69,17 @@
         </div>
         <div class="col-sm-4" style="border-right: thick solid #333333;">
             <div class="form-group">
+                <% for(var i=0;i<10;i++){ %>
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user" aria-hidden="true"></i></span>
+                        <input type="text" class="form-control" name="name" id="name" value="<%= data.email %>" readonly />
 
-
-                <div class="input-group">
-                    <span class="input-group-addon"><i class="glyphicon glyphicon-user" aria-hidden="true"></i></span>
-                    <input type="text" class="form-control" name="name" id="name" readonly />
-               
-                </div>
-
+                    </div>
+                    <% } %>
 
             </div>
         </div>
-         <div class="col-sm-4">
+        <div class="col-sm-4">
             <div class="form-group">
 
 

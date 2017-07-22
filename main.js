@@ -15,11 +15,13 @@ app.get("/", function(req, resp) {
     resp.render("index");
 });
 
-app.get(/^(.+)$/, function(req, resp) {
+app.get("/" + /^(.+)$/, function(req, resp) {
   console.log(req.params[0]);
-  resp.sendFile(req.params[0] + ".html", {
-    root: path.join(__dirname + "/files")
-  });
+ 
+  // resp.sendFile(req.params[0] + ".html", {
+  //   root: path.join(__dirname + "/files")
+  // });
+  resp.render(""+req.param[0]+"");
 });
 
 app.post("/trial", urlEncodedparser, function(req, resp) {

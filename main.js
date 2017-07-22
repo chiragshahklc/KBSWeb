@@ -1,12 +1,14 @@
 var express = require("express");
 var path = require("path");
 var app = express();
+var server = require('http').createServer(app);
+var io = require("socket.io").listen(server);
 var bodyParser = require("body-parser");
 var sessions = require("express-session");
 var connection = require("./db");
 var herokucon = require("./db");
 connection = herokucon;
-var io = require("socket.io").listen(3000);
+
 
 var urlEncodedparser = bodyParser.urlencoded({ extended: false });
 
@@ -77,6 +79,10 @@ app.post("/login", urlEncodedparser, function(req, resp) {
   }
 });
 
-app.listen(process.env.PORT || 80, function() {
-  console.log("Listening on Port 80.");
-});
+// var listener = app.listen(process.env.PORT || 80, function() {
+//   console.log("Express listening on Port " + listener.address().port);
+// })
+
+var socketListener = server.listen(process.env.PORT || 80, function(){
+  console.log("Socket.IO listening on Port " + socketListener.address().port);
+})

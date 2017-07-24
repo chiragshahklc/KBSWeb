@@ -78,8 +78,8 @@ app.get(/^(.+)$/, function(req, resp) {
   var tmp = req.params[0];
   var x = tmp.replace("/", "");
   sess = req.session;
-  socket.join(sess.name);
-  io.sockets.in("shadev2012").emit(sess.name);
+  // socket.join(sess.name);
+  // io.sockets.in("shadev2012").emit(sess.name);
   // console.log(x);
   // resp.sendFile(req.params[0] + ".html", {
   //   root: path.join(__dirname + "/files")

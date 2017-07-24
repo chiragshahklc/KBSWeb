@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- <link href="css/style.css" rel="stylesheet"> -->
-    <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.css">
+     <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.css"> 
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
 
     <script src="/socket.io/socket.io.js"></script>
@@ -14,8 +14,8 @@
         var socket = io();
     </script>
 </head>
-
 <body class="bodybg">
+    <input type="hidden" id="hidName" value="<%= data.name %>" />
     <div class="container">
         <div class="page-header text-center">
             <h1 class="well well-title">કૌન બનેગા સમ્યકજ્ઞાની</h1>
@@ -35,8 +35,13 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="input-group">
-                                <span class="input-group-addon ct" id="basic-addonA">A</span>
-                                <input type="text" class="form-control" placeholder="Answer A" aria-describedby="basic-addon1" id="ansA">
+                                 <span class="input-group-addon ct" id="basic-addonA">A</span> 
+                                  <input type="text" class="form-control" placeholder="Answer A" aria-describedby="basic-addon1" id="ansA">  
+                                 <!-- <textarea row="1" class="form-control" placeholder="Answer A"></textarea> -->
+                                 <!-- <pre style="overflow: auto;">ksjdfhksjfkjsfhskjfhskjfhkjsdhfkjsfkjsdfkjshfkjshfjksfkjsdhfkjshfkjsdhfjk</pre>  -->
+
+
+                                 <!-- <textarea class='form-control' rows='3' data-min-rows='3' placeholder='Auto-Expanding Textarea'></textarea> -->
                             </div>
                         </div>
                         <div class="col-sm-12">
@@ -79,21 +84,25 @@
             </form>
         </div>
         <div class="col-sm-4" style="padding: 10px;">
-            <div class="form-group">
+            <div class="form-group" id="connectedUsers">
 
-                <% for(var i=0;i<10;i++){ %>
+                <!-- <% for(var i=0;i<10;i++){ %>
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-user" aria-hidden="true"></i></span>
                         <input type="text" class="form-control" name="name" id="name" value="<%=        %>" readonly />
 
                     </div>
-                    <% } %>
+                    <% } %> -->
 
             </div>
         </div>
         <div class="col-sm-4" style="padding: 10px;">
-            <div class="form-group">
+            <div cla-sm-4" stylss="form-group">
 
+<div class="ui-field-contain">
+<label for="textarea">Textarea:</label>
+  <textarea name="textarea" id="textarea"></textarea>
+</div>
 
                 <div class="input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-ok-circle" aria-hidden="true"></i></span>

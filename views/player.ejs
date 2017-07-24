@@ -12,11 +12,16 @@
     <!-- Google Fonts -->
     <link href='' rel='stylesheet' type='text/css'>
     <link href='assets/css/Oxygen.css' rel='stylesheet' type='text/css'>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        var socket = io();
+    </script>
 
     <title>Admin</title>
 </head>
 
 <body class="bodybg">
+    <input type="hidden" id="hidName" value="<%= data.name %>" />
     <div class="container">
         <!-- <div class="main"> -->
             <div class="panel-heading">
@@ -83,7 +88,7 @@
     </div>
     <script src="assets/js/jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="assets/js/bootstrap.js"></script>
-    <script src="assets/js/index3.js"></script>
+    <script src="assets/js/player.js"></script>
 </body>
 
 </html>

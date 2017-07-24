@@ -2,48 +2,73 @@ var btnQues = document.getElementById("btnLoadQues");
 btnQues.addEventListener("click", LoadQues);
 
 function LoadQues() {
-  console.log("Conncted from admin");
   var txtQues = document.getElementById("txtQues");
-  socket.emit("loadques",$(".selectpicker").val());
+  socket.emit("loadques", $(".selectpicker").val());
   socket.on("quesrecv", function(data) {
-    console.log(data);
-    console.log(data[0]);
 
     var x = document.getElementById("txtQues");
     x.innerHTML = data[0].question;
-    x.style.fontFamily = "SHREE-GUJ7-1120";
+    x.style.fontFamily = "gujFont";
     x.style.fontSize = "30px";
-
     var xA = document.getElementById("ansA");
     xA.value = data[0].A;
-    xA.style.fontFamily = "SHREE-GUJ7-1120";
+    xA.style.fontFamily = "gujFont";
     xA.style.fontSize = "15px";
     var xB = document.getElementById("ansB");
     xB.value = data[0].B;
-    xB.style.fontFamily = "SHREE-GUJ7-1120";
+    xB.style.fontFamily = "gujFont";
     xB.style.fontSize = "15px";
     var xC = document.getElementById("ansC");
     xC.value = data[0].C;
-    xC.style.fontFamily = "SHREE-GUJ7-1120";
+    xC.style.fontFamily = "gujFont";
     xC.style.fontSize = "15px";
     var xD = document.getElementById("ansD");
     xD.value = data[0].D;
-    xD.style.fontFamily = "SHREE-GUJ7-1120";
+    xD.style.fontFamily = "gujFont";
     xD.style.fontSize = "15px";
   });
 }
 
+socket.on("sendMyName", function(data) {
+  $("#connectedUsers").html(function(ind, oldtext) {
+    return (
+      oldtext +
+      '<div class="input-group">' +
+      '<span class="input-group-addon"><i class="glyphicon glyphicon-user" aria-hidden="true"></i></span>' +
+      '<input type="text" class="form-control" name="name" id="name" value="'+ data +'" readonly />' +
+      "</div>"
+    );
+  });
+});
+
 $(document).ready(function() {
-  $("#txtNum").attr("Max", "10");
+  //Populate combobox with total number of questions
   socket.emit("numOfQues");
   socket.on("numOfQuesReceived", function(data) {
-    console.log(data);
     var x = data[0].count;
     for (i = 1; i <= x; i++) {
-      console.log(i);
       $(".selectpicker").html(function(ind, oldtext) {
         return oldtext + "<option>" + i + "</option>";
       });
     }
   });
+
+  //
+  socket.emit("myName", $("#hidName").val());
 });
+
+// Applied globally on all textareas with the "autoExpand" class
+$(document)
+  .one("focus.autoExpand", "textarea.autoExpand", function() {
+    var savedValue = this.value;
+    this.value = "";
+    this.baseScrollHeight = this.scrollHeight;
+    this.value = savedValue;
+  })
+  .on("input.autoExpand", "textarea.autoExpand", function() {
+    var minRows = this.getAttribute("data-min-rows") | 0,
+      rows;
+    this.rows = minRows;
+    rows = Math.ceil((this.scrollHeight - this.baseScrollHeight) / 17);
+    this.rows = minRows + rows;
+  });

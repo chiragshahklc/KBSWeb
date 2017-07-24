@@ -1,3 +1,4 @@
+
 .bodybg {
   /* background-color: #0f3c4f; */
   background-image: url("../images/rulebg7.png");
@@ -43,8 +44,15 @@
 }
 
 @font-face {
-    font-family: "gujFont";
-    src: url(../fonts/S1120892_2.TTF) format('truetype');
+    font-family: gujFont;
+    src: url(../fonts/S1120892_2.woff);
+    font-weight: normal;
+    font-style: normal;
+    /* url(../fonts/S1120892_2.TTF) format('truetype'), */
+}
+
+.gujju{
+  font-family: "gujFont";
 }
 
 @media (max-width: 768px) {
@@ -52,3 +60,19 @@
     margin-bottom: 10px;
   }
 }
+
+
+/* 
+textarea{  
+  display:block;
+  box-sizing: padding-box;
+  overflow:hidden;
+
+  padding:10px;
+  width:250px;
+  font-size:14px;
+  margin:50px auto;
+  border-radius:6px;
+  box-shadow:2px 2px 8px rgba(0,0,0,.3);
+  border:0;
+} */

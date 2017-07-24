@@ -7,7 +7,7 @@ var bodyParser = require("body-parser");
 var sessions = require("express-session");
 var connection = require("./db");
 var herokucon = require("./db");
-connection = herokucon;
+// connection = herokucon;
 
 var urlEncodedparser = bodyParser.urlencoded({ extended: false });
 
@@ -17,14 +17,25 @@ app.use("/assets", express.static(__dirname + "/assets"));
 app.use(sessions({ secret: "xxx" }));
 
 var sess;
+var listSocket = {
+  name: "",
+  id: ""
+};
+var persons = [];
 
 var socketCount = 0;
 io.sockets.on("connection", function(socket) {
+  //TMP
   socketCount++;
+  persons.push({ name: "", id: socket.id });
 
   //This is for requesting question from admin
   socket.on("loadques", function(id) {
-    connection.query("select * from fff where id="+id, function(err, rows, cols) {
+    connection.query("select * from fff where id=" + id, function(
+      err,
+      rows,
+      cols
+    ) {
       if (err) {
         throw err;
       } else {
@@ -33,32 +44,39 @@ io.sockets.on("connection", function(socket) {
     });
   });
 
-
+  //
+  socket.on("myName", function(data) {
+    persons[persons.findIndex(x => x.id === socket.id)].name = data;
+    socket.join(data);
+    if (data !== "shadev2012" && data !== "public") {
+      socket.in("shadev2012").emit("sendMyName", data);
+    }
+  });
 
   //This is for requesting numberOfQuestion from admin
-  socket.on("numOfQues", function(){
-   connection.query("select count(*) as count from fff", function(err, rows, cols) {
+  socket.on("numOfQues", function() {
+    connection.query("select count(*) as count from fff", function(
+      err,
+      rows,
+      cols
+    ) {
       if (err) {
         throw err;
       } else {
-        console.log(rows);
         socket.emit("numOfQuesReceived", rows);
       }
     });
-  })
+  });
+});
 
-
-  
-
-
-  console.log(socketCount);
+app.get("/favicon.ico", function(req, res) {
+  res.status(204);
 });
 
 app.get("/", function(req, resp) {
   //   resp.sendFile("index.html", { root: path.join(__dirname, "/files") });
 
   sess = req.session;
- 
 
   if (sess.name) {
     if (sess.name == "shadev2012") {
@@ -66,7 +84,7 @@ app.get("/", function(req, resp) {
     } else if (sess.name == "public") {
       resp.render("public");
     } else {
-      resp.render("player");
+      resp.redirect("player");
     }
   } else {
     resp.render("index");
@@ -84,19 +102,17 @@ app.get(/^(.+)$/, function(req, resp) {
   // resp.sendFile(req.params[0] + ".html", {
   //   root: path.join(__dirname + "/files")
   // });
-  resp.render(x, { data: sess});
+  resp.render(x, { data: sess });
 });
 
-
 app.post("/login", urlEncodedparser, function(req, resp) {
-  console.log(req.body);
   sess = req.session;
   sess.name = req.body.name;
   sess.pass = req.body.password;
   if (sess.name === "shadev2012" && sess.pass === "") {
     resp.redirect("admin");
   } else if (sess.pass === "xx") {
-    resp.render("player", { data: sess });
+    resp.redirect("player");
   } else if (sess.name === "public") {
     resp.render("public", { data: sess });
   } else {

@@ -7,7 +7,7 @@ var bodyParser = require("body-parser");
 var sessions = require("express-session");
 var connection = require("./db");
 var herokucon = require("./db");
-// connection = herokucon;
+connection = herokucon;
 
 var urlEncodedparser = bodyParser.urlencoded({ extended: false });
 

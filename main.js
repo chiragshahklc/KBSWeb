@@ -21,8 +21,10 @@ var sess;
 var socketCount = 0;
 io.sockets.on("connection", function(socket) {
   socketCount++;
-  socket.on("loadques", function() {
-    connection.query("select * from fff", function(err, rows, cols) {
+
+  //This is for requesting question from admin
+  socket.on("loadques", function(id) {
+    connection.query("select * from fff where id="+id, function(err, rows, cols) {
       if (err) {
         throw err;
       } else {
@@ -30,17 +32,37 @@ io.sockets.on("connection", function(socket) {
       }
     });
   });
-  //console.log(socketCount);
+
+
+
+  //This is for requesting numberOfQuestion from admin
+  socket.on("numOfQues", function(){
+   connection.query("select count(*) as count from fff", function(err, rows, cols) {
+      if (err) {
+        throw err;
+      } else {
+        console.log(rows);
+        socket.emit("numOfQuesReceived", rows);
+      }
+    });
+  })
+
+
+  
+
+
+  console.log(socketCount);
 });
 
 app.get("/", function(req, resp) {
   //   resp.sendFile("index.html", { root: path.join(__dirname, "/files") });
 
   sess = req.session;
+ 
 
   if (sess.name) {
     if (sess.name == "shadev2012") {
-      resp.render("admin");
+      resp.redirect("admin");
     } else if (sess.name == "public") {
       resp.render("public");
     } else {
@@ -55,11 +77,14 @@ app.get(/^(.+)$/, function(req, resp) {
   // console.log(req.params[0]);
   var tmp = req.params[0];
   var x = tmp.replace("/", "");
+  sess = req.session;
+  socket.join(sess.name);
+  io.sockets.in("shadev2012").emit(sess.name);
   // console.log(x);
   // resp.sendFile(req.params[0] + ".html", {
   //   root: path.join(__dirname + "/files")
   // });
-  resp.render(x, { data: req.body });
+  resp.render(x, { data: sess});
 });
 
 
@@ -69,13 +94,13 @@ app.post("/login", urlEncodedparser, function(req, resp) {
   sess.name = req.body.name;
   sess.pass = req.body.password;
   if (sess.name === "shadev2012" && sess.pass === "") {
-    resp.render("admin", { data: req.body });
+    resp.redirect("admin");
   } else if (sess.pass === "xx") {
-    resp.render("player", { data: req.body });
+    resp.render("player", { data: sess });
   } else if (sess.name === "public") {
-    resp.render("public", { data: req.body });
+    resp.render("public", { data: sess });
   } else {
-    resp.render("index", { data: req.body });
+    resp.render("index", { data: sess });
   }
 });
 

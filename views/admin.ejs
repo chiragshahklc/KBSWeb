@@ -20,7 +20,13 @@
         <div class="page-header text-center">
             <h1 class="well well-title">કૌન બનેગા સમ્યકજ્ઞાની</h1>
         </div>
-        <div class="col-sm-4" style="border-right: thick solid #333333;">
+        <div class="col-sm-4" style="padding: 10px;">
+            <div class="input-group bot-pad">
+                <select class="selectpicker">
+                    
+                </select>
+
+            </div>
             <div class="well" id="txtQues">
                 Question
             </div>
@@ -65,27 +71,27 @@
                     <div class="row">
                         <div class="col-lg-4 col-lg-offset-4 text-center">
                             <div class="btn-group">
-                                <button type="button" class="btn btn-success" id="btnLoadQues" >Load Question</button>
+                                <button type="button" class="btn btn-success" id="btnLoadQues">Load Question</button>
                             </div>
                         </div>
                     </div>
                 </div>
             </form>
         </div>
-        <div class="col-sm-4" style="border-right: thick solid #333333;">
+        <div class="col-sm-4" style="padding: 10px;">
             <div class="form-group">
 
                 <% for(var i=0;i<10;i++){ %>
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-user" aria-hidden="true"></i></span>
-                        <input type="text" class="form-control" name="name" id="name" value="<%= data.name %>" readonly />
+                        <input type="text" class="form-control" name="name" id="name" value="<%=        %>" readonly />
 
                     </div>
                     <% } %>
 
             </div>
         </div>
-        <div class="col-sm-4">
+        <div class="col-sm-4" style="padding: 10px;">
             <div class="form-group">
 
 

@@ -6,8 +6,6 @@ var io = require("socket.io").listen(server);
 var bodyParser = require("body-parser");
 var sessions = require("express-session");
 var connection = require("./db");
-var herokucon = require("./db");
-connection = herokucon;
 
 var urlEncodedparser = bodyParser.urlencoded({ extended: false });
 
@@ -31,15 +29,23 @@ io.sockets.on("connection", function(socket) {
 
   //This is for requesting question from admin
   socket.on("loadques", function(id) {
-    connection.query("select * from fff where id=" + id, function(
-      err,
-      rows,
-      cols
-    ) {
+    connection.getConnection(function(err, tmpCon) {
       if (err) {
-        throw err;
+        console.log(err);
+        tmpCon.release();
       } else {
-        socket.emit("quesrecv", rows);
+        connection.query("select * from fff where id=" + id, function(
+          err,
+          rows,
+          cols
+        ) {
+          if (err) {
+            throw err;
+          } else {
+            socket.emit("quesrecv", rows);
+          }
+          tmpCon.release();
+        });
       }
     });
   });
@@ -47,25 +53,109 @@ io.sockets.on("connection", function(socket) {
   //
   socket.on("myName", function(data) {
     persons[persons.findIndex(x => x.id === socket.id)].name = data;
-    socket.join(data);
+    //socket.join(data);
     if (data !== "shadev2012" && data !== "public") {
+      socket.join("player");
       socket.in("shadev2012").emit("sendMyName", data);
+    } else if (data == "shadev2012") {
+      socket.join("shadev2012");
+    } else {
+      socket.join("public");
     }
   });
 
   //This is for requesting numberOfQuestion from admin
   socket.on("numOfQues", function() {
-    connection.query("select count(*) as count from fff", function(
-      err,
-      rows,
-      cols
-    ) {
+    connection.getConnection(function(err, tmpCon) {
       if (err) {
-        throw err;
+        console.log(err);
+        tmpCon.release();
       } else {
-        socket.emit("numOfQuesReceived", rows);
+        connection.query("select count(*) as count from fff", function(
+          err,
+          rows,
+          cols
+        ) {
+          if (err) {
+            throw err;
+          } else {
+            socket.emit("numOfQuesReceived", rows);
+          }
+          tmpCon.release();
+        });
       }
     });
+  });
+
+  socket.on("sendQuestion", function(data) {
+    connection.getConnection(function(err, tmpCon) {
+      if (err) {
+        console.log(err);
+        tmpCon.release();
+      } else {
+        connection.query("select * from fff where id = " + data, function(
+          err,
+          rows,
+          cols
+        ) {
+          if (err) {
+            throw err;
+          } else {
+            socket.in("player").emit("sendquestion", rows);
+            socket.in("public").emit("sendquestion", rows);
+          }
+          tmpCon.release();
+        });
+      }
+    });
+  });
+
+  socket.on("optionToPlayer", function(data) {
+    connection.getConnection(function(err, tmpCon) {
+      if (err) {
+        console.log(err);
+        tmpCon.release();
+      } else {
+        connection.query("select * from fff where id = " + data, function(
+          err,
+          rows,
+          cols
+        ) {
+          if (err) {
+            throw err;
+          } else {
+            socket.in("player").emit("optionToPlayer", rows);
+          }
+          tmpCon.release();
+        });
+      }
+    });
+  })
+
+  socket.on("optionToPublic", function(data) {
+    connection.getConnection(function(err, tmpCon) {
+      if (err) {
+        console.log(err);
+        tmpCon.release();
+      } else {
+        connection.query("select * from fff where id = " + data, function(
+          err,
+          rows,
+          cols
+        ) {
+          if (err) {
+            throw err;
+          } else {
+            socket.in("public").emit("optionToPublic", rows);
+          }
+          tmpCon.release();
+        });
+      }
+    });
+  })
+
+  socket.on("calculate", function(data) {
+    socket.in("shadev2012").emit("calculate", data);
   });
 });
 
@@ -82,7 +172,7 @@ app.get("/", function(req, resp) {
     if (sess.name == "shadev2012") {
       resp.redirect("admin");
     } else if (sess.name == "public") {
-      resp.render("public");
+      resp.redirect("public");
     } else {
       resp.redirect("player");
     }
@@ -102,7 +192,13 @@ app.get(/^(.+)$/, function(req, resp) {
   // resp.sendFile(req.params[0] + ".html", {
   //   root: path.join(__dirname + "/files")
   // });
-  resp.render(x, { data: sess });
+  resp.render(x, { data: sess }, function(err, html) {
+    if (err) {
+      resp.redirect("/");
+    } else {
+      resp.send(html);
+    }
+  });
 });
 
 app.post("/login", urlEncodedparser, function(req, resp) {
@@ -114,9 +210,9 @@ app.post("/login", urlEncodedparser, function(req, resp) {
   } else if (sess.pass === "xx") {
     resp.redirect("player");
   } else if (sess.name === "public") {
-    resp.render("public", { data: sess });
+    resp.redirect("public");
   } else {
-    resp.render("index", { data: sess });
+    resp.redirect("/");
   }
 });
 

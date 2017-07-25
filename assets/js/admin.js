@@ -5,27 +5,41 @@ function LoadQues() {
   var txtQues = document.getElementById("txtQues");
   socket.emit("loadques", $(".selectpicker").val());
   socket.on("quesrecv", function(data) {
-
+    console.log(data);
     var x = document.getElementById("txtQues");
     x.innerHTML = data[0].question;
     x.style.fontFamily = "gujFont";
-    x.style.fontSize = "30px";
+    // x.style.fontSize = "30px";
     var xA = document.getElementById("ansA");
     xA.value = data[0].A;
     xA.style.fontFamily = "gujFont";
-    xA.style.fontSize = "15px";
+    // xA.style.fontSize = "15px";
     var xB = document.getElementById("ansB");
     xB.value = data[0].B;
     xB.style.fontFamily = "gujFont";
-    xB.style.fontSize = "15px";
+    // xB.style.fontSize = "15px";
     var xC = document.getElementById("ansC");
     xC.value = data[0].C;
     xC.style.fontFamily = "gujFont";
-    xC.style.fontSize = "15px";
+    // xC.style.fontSize = "15px";
     var xD = document.getElementById("ansD");
     xD.value = data[0].D;
     xD.style.fontFamily = "gujFont";
-    xD.style.fontSize = "15px";
+    // xD.style.fontSize = "15px";
+
+    $("#finalAnswer")
+      .attr("hidden", false)
+      .html(
+        "<li> <b>Ans: </b>" +
+          data[0].ans1 +
+          " " +
+          data[0].ans2 +
+          " " +
+          data[0].ans3 +
+          " " +
+          data[0].ans4 +
+          "</li>"
+      );
   });
 }
 
@@ -35,8 +49,39 @@ socket.on("sendMyName", function(data) {
       oldtext +
       '<div class="input-group">' +
       '<span class="input-group-addon"><i class="glyphicon glyphicon-user" aria-hidden="true"></i></span>' +
-      '<input type="text" class="form-control" name="name" id="name" value="'+ data +'" readonly />' +
+      '<input type="text" class="form-control" name="name" id="name" value="' +
+      data +
+      '" readonly />' +
       "</div>"
+    );
+  });
+});
+
+socket.on("calculate", function(data) {
+  $("#answerCalculate").attr("hidden", false);
+  $("#answerCalculate").html(function(ind, oldtext) {
+    var answer =
+      data["1"] + " " + data["2"] + " " + data["3"] + " " + data["4"];
+
+    var t = new Date();
+    var time =
+      t.getHours() +
+      ":" +
+      t.getMinutes() +
+      ":" +
+      t.getSeconds() +
+      ":" +
+      t.getMilliseconds();
+    return (
+      oldtext +
+      "<li>Name<b>: " +
+      data.name +
+      "</b><br/>" +
+      answer +
+      "<br/>" +
+      "Time: " +
+      time +
+      "</li><br/>"
     );
   });
 });
@@ -72,3 +117,15 @@ $(document)
     rows = Math.ceil((this.scrollHeight - this.baseScrollHeight) / 17);
     this.rows = minRows + rows;
   });
+
+$("#btnSendAllQuestion").click(function() {
+  socket.emit("sendQuestion", $(".selectpicker").val());
+});
+
+$("#btnSendPlayerOption").click(function() {
+  socket.emit("optionToPlayer",$(".selectpicker").val())
+});
+
+$("#btnSendPublicOption").click(function() {
+  socket.emit("optionToPublic",$(".selectpicker").val())
+});

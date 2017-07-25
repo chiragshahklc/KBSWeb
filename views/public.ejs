@@ -22,62 +22,63 @@
 
 <body class="bodybg">
     <input type="hidden" id="hidName" value="<%= data.name %>" />
-    
-        <div class="container">
-            <div class="main">
-                <div class="panel-heading">
-                    <div class="page-title text-center">
-                        <h1 class="h1-title">કૌન બનેગા સમ્યક્જ્ઞાની</h1>
-                        <hr />
-                        <h2 class="well well-title">Fastest Finger First</h2>
-                    </div>
+
+    <div class="container">
+        <div class="main">
+            <div class="panel-heading">
+                <div class="page-title text-center">
+                    <h1 class="h1-title">કૌન બનેગા સમ્યક્જ્ઞાની</h1>
+                    <hr />
+                    <h2 class="well well-title">Fastest Finger First</h2>
                 </div>
-                <div class="col-sm-9">
+            </div>
+            <div class="col-sm-9">
                 <div class="ans-padding">
                     <div class="well" id="ques">
                         Question
                     </div>
 
                     <form method="post" action="index2.html">
-                        <div <div class="form-group">
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <div class="input-group">
-                                        <span class="input-group-addon ct" id="basic-addonA">A</span>
-                                        <input type="text" class="form-control" placeholder="Answer A" aria-describedby="basic-addon1" id="ansA">
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="input-group">
-                                        <span class="input-group-addon ct" id="basic-addonB">B</span>
-                                        <input type="text" class="form-control" placeholder="Answer B" aria-describedby="basic-addon1" id="ansB">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="btn-group">
+                        <div id="divOPT">
+                            <div class="form-group">
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <div class="input-group">
-                                            <span class="input-group-addon ct" id="basic-addonC">C</span>
-                                            <input type="text" class="form-control" placeholder="Answer C" aria-describedby="basic-addon1" id="ansC">
+                                            <span class="input-group-addon ct" id="basic-addonA">A</span>
+                                            <input type="text" class="form-control" placeholder="Answer A" aria-describedby="basic-addon1" id="ansA">
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="input-group">
-                                            <span class="input-group-addon ct" id="basic-addonD">D</span>
-                                            <input type="text" class="form-control" placeholder="Answer D" aria-describedby="basic-addon1" id="ansD">
+                                            <span class="input-group-addon ct" id="basic-addonB">B</span>
+                                            <input type="text" class="form-control" placeholder="Answer B" aria-describedby="basic-addon1" id="ansB">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="btn-group">
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="input-group">
+                                                <span class="input-group-addon ct" id="basic-addonC">C</span>
+                                                <input type="text" class="form-control" placeholder="Answer C" aria-describedby="basic-addon1" id="ansC">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="input-group">
+                                                <span class="input-group-addon ct" id="basic-addonD">D</span>
+                                                <input type="text" class="form-control" placeholder="Answer D" aria-describedby="basic-addon1" id="ansD">
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
                         <!-- Aswers Are Start From here   -->
                         <br/>
 
-                        <div >
+                        <div id="divANS" hidden>
                             <div class="well well-sm well-ans text-center">
 
                                 Answer
@@ -87,13 +88,13 @@
                                     <div class="col-sm-6 col-sm-offset-3">
                                         <div class="input-group bot-pad">
                                             <span class="input-group-addon ct" id="basic-addonA">1</span>
-                                            <input type="text" class="form-control" placeholder="Answer A" aria-describedby="basic-addon1">
+                                            <input type="text" class="form-control" placeholder="Answer A" aria-describedby="basic-addon1" id="ans1">
                                         </div>
                                     </div>
                                     <div class="col-sm-6 col-sm-offset-3">
                                         <div class="input-group">
                                             <span class="input-group-addon ct" id="basic-addonB">2</span>
-                                            <input type="text" class="form-control" placeholder="Answer B" aria-describedby="basic-addon1">
+                                            <input type="text" class="form-control" placeholder="Answer B" aria-describedby="basic-addon1" id="ans2">
                                         </div>
                                     </div>
                                 </div>
@@ -105,13 +106,13 @@
                                         <div class="col-sm-6 col-sm-offset-3">
                                             <div class="input-group bot-pad">
                                                 <span class="input-group-addon ct" id="basic-addonC">3</span>
-                                                <input type="text" class="form-control" placeholder="Answer C" aria-describedby="basic-addon1">
+                                                <input type="text" class="form-control" placeholder="Answer C" aria-describedby="basic-addon1" id="ans3">
                                             </div>
                                         </div>
                                         <div class="col-sm-6 col-sm-offset-3">
                                             <div class="input-group">
                                                 <span class="input-group-addon ct" id="basic-addonD">4</span>
-                                                <input type="text" class="form-control" placeholder="Answer D" aria-describedby="basic-addon1">
+                                                <input type="text" class="form-control" placeholder="Answer D" aria-describedby="basic-addon1" id="ans4">
                                             </div>
                                         </div>
                                     </div>
@@ -124,7 +125,7 @@
         </div>
     </div>
     <div class="col-sm-3">
-        
+
     </div>
     <script src="assets/js/jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="assets/js/bootstrap.js"></script>

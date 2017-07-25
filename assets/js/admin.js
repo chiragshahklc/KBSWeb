@@ -57,12 +57,21 @@ socket.on("sendMyName", function(data) {
   });
 });
 
+var winner = 0;
 socket.on("calculate", function(data) {
   $("#answerCalculate").attr("hidden", false);
   $("#answerCalculate").html(function(ind, oldtext) {
     var answer =
       data["1"] + " " + data["2"] + " " + data["3"] + " " + data["4"];
 
+    var sty = "";
+    if ($("#finalAnswer").html().indexOf(answer) !== -1) {
+      if (winner === 0) {
+        console.log("This is winner");
+        winner++;
+        sty = ' style="color:green;"';
+      }
+    }
     var t = new Date();
     var time =
       t.getHours() +
@@ -74,7 +83,9 @@ socket.on("calculate", function(data) {
       t.getMilliseconds();
     return (
       oldtext +
-      "<li>Name<b>: " +
+      "<li" +
+      sty +
+      ">Name<b>: " +
       data.name +
       "</b><br/>" +
       answer +
@@ -123,9 +134,13 @@ $("#btnSendAllQuestion").click(function() {
 });
 
 $("#btnSendPlayerOption").click(function() {
-  socket.emit("optionToPlayer",$(".selectpicker").val())
+  socket.emit("optionToPlayer", $(".selectpicker").val());
 });
 
 $("#btnSendPublicOption").click(function() {
-  socket.emit("optionToPublic",$(".selectpicker").val())
+  socket.emit("optionToPublic", $(".selectpicker").val());
+});
+
+$("#btnSendAllAnswer").click(function() {
+  socket.emit("ansToPublic", $(".selectpicker").val());
 });

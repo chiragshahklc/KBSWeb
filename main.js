@@ -154,6 +154,28 @@ io.sockets.on("connection", function(socket) {
     });
   })
 
+  socket.on("ansToPublic", function(data) {
+    connection.getConnection(function(err, tmpCon) {
+      if (err) {
+        console.log(err);
+        tmpCon.release();
+      } else {
+        connection.query("select * from fff where id = " + data, function(
+          err,
+          rows,
+          cols
+        ) {
+          if (err) {
+            throw err;
+          } else {
+            socket.in("public").emit("ansToPublic", rows);
+          }
+          tmpCon.release();
+        });
+      }
+    });
+  })
+
   socket.on("calculate", function(data) {
     socket.in("shadev2012").emit("calculate", data);
   });

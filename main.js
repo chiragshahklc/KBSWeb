@@ -182,6 +182,7 @@ io.sockets.on("connection", function(socket) {
 
   socket.on("winnerToPublic", function(data) {
     socket.in("public").emit("winnerToPublic", data);
+    socket.in("player").emit("winnerToPublic", data);
   });
 });
 

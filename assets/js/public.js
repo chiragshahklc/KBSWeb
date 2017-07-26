@@ -29,7 +29,6 @@ socket.on("ansToPublic", function(data) {
 });
 
 socket.on("winnerToPublic", function(data) {
-  console.log("i m here");
   $("#winnerList").html(data).attr("hidden", false);
 
 });

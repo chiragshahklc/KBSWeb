@@ -71,6 +71,8 @@ socket.on("calculate", function(data) {
         winner++;
         sty = ' style="color:green;"';
       }
+    } else {
+      sty = ' style="color:red;"';
     }
     var t = new Date();
     var time =

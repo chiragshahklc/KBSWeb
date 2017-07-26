@@ -26,71 +26,77 @@
         <!-- <div class="main"> -->
         <div class="panel-heading">
             <div class="page-title text-center">
-                <h1 class="h1-title">કૌન બનેગા સમ્યક્જ્ઞાની</h1>
+                <h1 class="h1-title">L$p¥“ b“¡Np kçeL$¹op“u</h1>
                 <hr />
                 <h2 class="well well-title">Fastest Finger First</h2>
             </div>
         </div>
         <div class="ans-padding">
-            <div class="form-control form-group well-title">
-                Welcome
-                <%= data.name %>!
-            </div>
-            <div class="well" id="ques">
-                Question
-            </div>
-            <form method="post" action="index2.html">
-                <div <div class="form-group">
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <div class="input-group botpad">
-                                <span class="input-group-addon ct" id="basic-addonA">A</span>
-                                <input type="text" class="form-control" placeholder="Answer A" aria-describedby="basic-addon1" id="ansA">
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="input-group botpad">
-                                <span class="input-group-addon ct" id="basic-addonB">B</span>
-                                <input type="text" class="form-control" placeholder="Answer B" aria-describedby="basic-addon1" id="ansB">
-                            </div>
-                        </div>
-                    </div>
+            <div id="divHide">
+                <div class="form-control form-group well-title">
+                    Welcome
+                    <%= data.name %>!
                 </div>
-                <div class="form-group">
-                    <!-- <div class="btn-group"> -->
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <div class="input-group botpad">
-                                <span class="input-group-addon ct" id="basic-addonC">C</span>
-                                <input type="text" class="form-control" placeholder="Answer C" aria-describedby="basic-addon1" id="ansC">
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="input-group botpad">
-                                <span class="input-group-addon ct" id="basic-addonD">D</span>
-                                <input type="text" class="form-control" placeholder="Answer D" aria-describedby="basic-addon1" id="ansD">
-                            </div>
-                        </div>
-                    </div>
-                    <!-- </div> -->
+                <div class="well" id="ques">
+                    Question
                 </div>
-
-                <div class="form-group">
-                    <!-- <div class="row"> -->
-                    <div class="col-lg-4 col-lg-offset-4 text-center form-group">
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-success" id="btnSubmit" disabled>Submit</button>
+                <form method="post" action="index2.html">
+                    <div <div class="form-group">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="input-group botpad">
+                                    <span class="input-group-addon ct" id="basic-addonA">A</span>
+                                    <input type="text" class="form-control" placeholder="Answer A" aria-describedby="basic-addon1" id="ansA">
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="input-group botpad">
+                                    <span class="input-group-addon ct" id="basic-addonB">B</span>
+                                    <input type="text" class="form-control" placeholder="Answer B" aria-describedby="basic-addon1" id="ansB">
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-lg-4 col-lg-offset-4 text-center form-group">
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-danger" id="btnClear">Clear</button>
+                    <div class="form-group">
+                        <!-- <div class="btn-group"> -->
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="input-group botpad">
+                                    <span class="input-group-addon ct" id="basic-addonC">C</span>
+                                    <input type="text" class="form-control" placeholder="Answer C" aria-describedby="basic-addon1" id="ansC">
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="input-group botpad">
+                                    <span class="input-group-addon ct" id="basic-addonD">D</span>
+                                    <input type="text" class="form-control" placeholder="Answer D" aria-describedby="basic-addon1" id="ansD">
+                                </div>
+                            </div>
                         </div>
+                        <!-- </div> -->
                     </div>
 
-                    <!-- </div> -->
-                </div>
-            </form>
+                    <div class="form-group">
+                        <!-- <div class="row"> -->
+                        <div class="col-lg-4 col-lg-offset-4 text-center form-group">
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-success" id="btnSubmit" disabled>Submit</button>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-lg-offset-4 text-center form-group">
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-danger" id="btnClear">Clear</button>
+                            </div>
+                        </div>
+
+                        <!-- </div> -->
+                    </div>
+                </form>
+            </div>
+            <div>
+                <ul class="well" id="winnerList" hidden>
+                </ul>
+            </div>
         </div>
         <!-- </div> -->
     </div>

@@ -27,3 +27,9 @@ socket.on("ansToPublic", function(data) {
   $("#divOPT").attr("hidden", true);
   $("#divANS").attr("hidden", false);
 });
+
+socket.on("winnerToPublic", function(data) {
+  console.log("i m here");
+  $("#winnerList").html(data).attr("hidden", false);
+
+});

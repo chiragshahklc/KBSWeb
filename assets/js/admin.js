@@ -144,3 +144,7 @@ $("#btnSendPublicOption").click(function() {
 $("#btnSendAllAnswer").click(function() {
   socket.emit("ansToPublic", $(".selectpicker").val());
 });
+
+$("#btnShowAnswer").click(function() {
+  socket.emit("winnerToPublic", $("#answerCalculate").html());
+});

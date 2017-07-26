@@ -130,7 +130,7 @@ io.sockets.on("connection", function(socket) {
         });
       }
     });
-  })
+  });
 
   socket.on("optionToPublic", function(data) {
     connection.getConnection(function(err, tmpCon) {
@@ -152,7 +152,7 @@ io.sockets.on("connection", function(socket) {
         });
       }
     });
-  })
+  });
 
   socket.on("ansToPublic", function(data) {
     connection.getConnection(function(err, tmpCon) {
@@ -174,10 +174,14 @@ io.sockets.on("connection", function(socket) {
         });
       }
     });
-  })
+  });
 
   socket.on("calculate", function(data) {
     socket.in("shadev2012").emit("calculate", data);
+  });
+
+  socket.on("winnerToPublic", function(data) {
+    socket.in("public").emit("winnerToPublic", data);
   });
 });
 

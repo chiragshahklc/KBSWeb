@@ -1,5 +1,9 @@
+var timeOfOptionSend = new Date();;
+
+
 var btnQues = document.getElementById("btnLoadQues");
 btnQues.addEventListener("click", LoadQues);
+
 
 function LoadQues() {
   var txtQues = document.getElementById("txtQues");
@@ -75,6 +79,9 @@ socket.on("calculate", function(data) {
       sty = ' style="color:red;"';
     }
     var t = new Date();
+    var t1 = new Date().getTime();
+    var sec = (t1 - timeOfOptionSend)/1000;
+    console.log(sec);
     var time =
       t.getHours() +
       ":" +
@@ -93,8 +100,8 @@ socket.on("calculate", function(data) {
       answer +
       "<br/>" +
       "Time: " +
-      time +
-      "</li><br/>"
+      sec +
+      " Seconds</li><br/>"
     );
   });
 });
@@ -137,6 +144,8 @@ $("#btnSendAllQuestion").click(function() {
 
 $("#btnSendPlayerOption").click(function() {
   socket.emit("optionToPlayer", $(".selectpicker").val());
+  timeOfOptionSend = new Date().getTime();
+  console.log(timeOfOptionSend);
 });
 
 $("#btnSendPublicOption").click(function() {

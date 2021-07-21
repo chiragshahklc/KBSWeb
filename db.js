@@ -1,20 +1,21 @@
+require("dotenv").config();
 var mysql = require("mysql");
 var connection;
 
 var localData = {
   connectionLimit: 50,
-  host: "localhost",
-  user: "root",
-  password: "chiragshahklc",
-  database: "kbsweb"
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PWD,
+  database: process.env.DB_NAME,
 };
 
 var herokuData = {
   connectionLimit: 10,
-  host: "eu-cdbr-west-01.cleardb.com",
-  user: "b911682d6c699f",
-  password: "40e42724",
-  database: "heroku_737b750af8ca434"
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PWD,
+  database: process.env.DB_NAME,
 };
 
 connection = mysql.createPool(herokuData);

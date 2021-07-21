@@ -17,42 +17,41 @@ app.use(sessions({ secret: "xxx" }));
 var sess;
 var listSocket = {
   name: "",
-  id: ""
+  id: "",
 };
 var persons = [];
 
 var socketCount = 0;
-io.sockets.on("connection", function(socket) {
+io.sockets.on("connection", function (socket) {
   //TMP
   socketCount++;
   persons.push({ name: "", id: socket.id });
 
   //This is for requesting question from admin
-  socket.on("loadques", function(id) {
-    connection.getConnection(function(err, tmpCon) {
+  socket.on("loadques", function (id) {
+    connection.getConnection(function (err, tmpCon) {
       if (err) {
         console.log(err);
         tmpCon.release();
       } else {
-        connection.query("select * from fff where id=" + id, function(
-          err,
-          rows,
-          cols
-        ) {
-          if (err) {
-            throw err;
-          } else {
-            socket.emit("quesrecv", rows);
+        connection.query(
+          "select * from fff where id=" + id,
+          function (err, rows, cols) {
+            if (err) {
+              throw err;
+            } else {
+              socket.emit("quesrecv", rows);
+            }
+            tmpCon.release();
           }
-          tmpCon.release();
-        });
+        );
       }
     });
   });
 
   //
-  socket.on("myName", function(data) {
-    persons[persons.findIndex(x => x.id === socket.id)].name = data;
+  socket.on("myName", function (data) {
+    persons[persons.findIndex((x) => x.id === socket.id)].name = data;
     //socket.join(data);
     if (data !== "shadev2012" && data !== "public") {
       socket.join("player");
@@ -65,132 +64,127 @@ io.sockets.on("connection", function(socket) {
   });
 
   //This is for requesting numberOfQuestion from admin
-  socket.on("numOfQues", function() {
-    connection.getConnection(function(err, tmpCon) {
+  socket.on("numOfQues", function () {
+    connection.getConnection(function (err, tmpCon) {
       if (err) {
         console.log(err);
         tmpCon.release();
       } else {
-        connection.query("select count(*) as count from fff", function(
-          err,
-          rows,
-          cols
-        ) {
-          if (err) {
-            throw err;
-          } else {
-            socket.emit("numOfQuesReceived", rows);
+        connection.query(
+          "select count(*) as count from fff",
+          function (err, rows, cols) {
+            if (err) {
+              throw err;
+            } else {
+              socket.emit("numOfQuesReceived", rows);
+            }
+            tmpCon.release();
           }
-          tmpCon.release();
-        });
+        );
       }
     });
   });
 
-  socket.on("sendQuestion", function(data) {
-    connection.getConnection(function(err, tmpCon) {
+  socket.on("sendQuestion", function (data) {
+    connection.getConnection(function (err, tmpCon) {
       if (err) {
         console.log(err);
         tmpCon.release();
       } else {
-        connection.query("select * from fff where id = " + data, function(
-          err,
-          rows,
-          cols
-        ) {
-          if (err) {
-            throw err;
-          } else {
-            socket.in("player").emit("sendquestion", rows);
-            socket.in("public").emit("sendquestion", rows);
+        connection.query(
+          "select * from fff where id = " + data,
+          function (err, rows, cols) {
+            if (err) {
+              throw err;
+            } else {
+              socket.in("player").emit("sendquestion", rows);
+              socket.in("public").emit("sendquestion", rows);
+            }
+            tmpCon.release();
           }
-          tmpCon.release();
-        });
+        );
       }
     });
   });
 
-  socket.on("optionToPlayer", function(data) {
-    connection.getConnection(function(err, tmpCon) {
+  socket.on("optionToPlayer", function (data) {
+    connection.getConnection(function (err, tmpCon) {
       if (err) {
         console.log(err);
         tmpCon.release();
       } else {
-        connection.query("select * from fff where id = " + data, function(
-          err,
-          rows,
-          cols
-        ) {
-          if (err) {
-            throw err;
-          } else {
-            socket.in("player").emit("optionToPlayer", rows);
+        connection.query(
+          "select * from fff where id = " + data,
+          function (err, rows, cols) {
+            if (err) {
+              throw err;
+            } else {
+              socket.in("player").emit("optionToPlayer", rows);
+            }
+            tmpCon.release();
           }
-          tmpCon.release();
-        });
+        );
       }
     });
   });
 
-  socket.on("optionToPublic", function(data) {
-    connection.getConnection(function(err, tmpCon) {
+  socket.on("optionToPublic", function (data) {
+    connection.getConnection(function (err, tmpCon) {
       if (err) {
         console.log(err);
         tmpCon.release();
       } else {
-        connection.query("select * from fff where id = " + data, function(
-          err,
-          rows,
-          cols
-        ) {
-          if (err) {
-            throw err;
-          } else {
-            socket.in("public").emit("optionToPublic", rows);
+        connection.query(
+          "select * from fff where id = " + data,
+          function (err, rows, cols) {
+            if (err) {
+              throw err;
+            } else {
+              socket.in("public").emit("optionToPublic", rows);
+            }
+            tmpCon.release();
           }
-          tmpCon.release();
-        });
+        );
       }
     });
   });
 
-  socket.on("ansToPublic", function(data) {
-    connection.getConnection(function(err, tmpCon) {
+  socket.on("ansToPublic", function (data) {
+    connection.getConnection(function (err, tmpCon) {
       if (err) {
         console.log(err);
         tmpCon.release();
       } else {
-        connection.query("select * from fff where id = " + data, function(
-          err,
-          rows,
-          cols
-        ) {
-          if (err) {
-            throw err;
-          } else {
-            socket.in("public").emit("ansToPublic", rows);
+        connection.query(
+          "select * from fff where id = " + data,
+          function (err, rows, cols) {
+            if (err) {
+              throw err;
+            } else {
+              socket.in("public").emit("ansToPublic", rows);
+            }
+            tmpCon.release();
           }
-          tmpCon.release();
-        });
+        );
       }
     });
   });
 
-  socket.on("calculate", function(data) {
+  socket.on("calculate", function (data) {
     socket.in("shadev2012").emit("calculate", data);
   });
 
-  socket.on("winnerToPublic", function(data) {
+  socket.on("winnerToPublic", function (data) {
     socket.in("public").emit("winnerToPublic", data);
     socket.in("player").emit("winnerToPublic", data);
   });
 });
 
-app.get("/favicon.ico", function(req, res) {
+app.get("/favicon.ico", function (req, res) {
   res.status(204);
 });
 
-app.get("/", function(req, resp) {
+app.get("/", function (req, resp) {
   //   resp.sendFile("index.html", { root: path.join(__dirname, "/files") });
 
   sess = req.session;
@@ -208,7 +202,7 @@ app.get("/", function(req, resp) {
   }
 });
 
-app.get(/^(.+)$/, function(req, resp) {
+app.get(/^(.+)$/, function (req, resp) {
   // console.log(req.params[0]);
   var tmp = req.params[0];
   var x = tmp.replace("/", "");
@@ -219,7 +213,7 @@ app.get(/^(.+)$/, function(req, resp) {
   // resp.sendFile(req.params[0] + ".html", {
   //   root: path.join(__dirname + "/files")
   // });
-  resp.render(x, { data: sess }, function(err, html) {
+  resp.render(x, { data: sess }, function (err, html) {
     if (err) {
       resp.redirect("/");
     } else {
@@ -228,7 +222,7 @@ app.get(/^(.+)$/, function(req, resp) {
   });
 });
 
-app.post("/login", urlEncodedparser, function(req, resp) {
+app.post("/login", urlEncodedparser, function (req, resp) {
   sess = req.session;
   sess.name = req.body.name;
   sess.pass = req.body.password;
@@ -247,6 +241,6 @@ app.post("/login", urlEncodedparser, function(req, resp) {
 //   console.log("Express listening on Port " + listener.address().port);
 // })
 
-var socketListener = server.listen(process.env.PORT || 80, function() {
+var socketListener = server.listen(process.env.PORT || 8080, function () {
   console.log("Socket.IO listening on Port " + socketListener.address().port);
 });
